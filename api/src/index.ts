@@ -1,11 +1,13 @@
 import express from "express";
 import { genres, movies } from "./db";
 import { filterById } from "./queries";
+import cors from "cors";
 
 const app = express();
 const PORT = 5000;
 
 app.use(express.json());
+app.use(cors({ origin: new RegExp("http[s]?://localhost:[0-9]{0,65535}/?") }));
 
 /**
  * Return movies that match the 'search term' with movie 'title'.
