@@ -17,7 +17,11 @@ export default new Vuex.Store<State>({
             state.genres = genres;
         },
     },
-    getters: {},
+    getters: {
+        getGenre: (state) => (genreId: number) => {
+            return state.genres.filter(({ id }) => id === genreId)[0]?.name;
+        },
+    },
     actions: {},
     modules: {},
 });
