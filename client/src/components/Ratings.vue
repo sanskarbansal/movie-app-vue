@@ -16,13 +16,12 @@
 
 <script>
 export default {
-    props: ["id", "movie", "yourRatings"],
+    props: ["yourRatings"],
     data() {
         return {
             active: this.yourRatings,
         };
     },
-    methods: {},
 };
 </script>
 

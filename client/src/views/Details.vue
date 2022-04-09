@@ -32,7 +32,7 @@
             {{ movie.release_date }}
         </div>
         <div v-if="movie !== null" class="ratings-container">
-            <ratings :yourRatings="movie.rating" v-model="movie" @submitRating="handleSubmitRating" />
+            <ratings :yourRatings="movie.rating" @submitRating="handleSubmitRating" />
         </div>
     </div>
 </template>
