@@ -1,12 +1,21 @@
-const getBaseUrl = () => "http://localhost:5000";
+import axios from "axios";
 
-const getUrl = (endpoint: string) => `${getBaseUrl()}/${endpoint}`;
+export const instance = axios.create({});
+instance.defaults.baseURL = "http://localhost:5000";
 
 export default {
-    getMovie() {
-        return getUrl("movies");
+    getMovies() {
+        return instance.get("/movies");
+    },
+    getMovie(id: string | number) {
+        return instance.get(`/movies/${id}`);
     },
     getGenres() {
-        return getUrl("genres");
+        return instance.get(`/genres`);
+    },
+    postRating(movieId: string | number, ratingVal: number | string) {
+        return instance.post(`/movies/${movieId}/ratings`, {
+            ratingVal,
+        });
     },
 };

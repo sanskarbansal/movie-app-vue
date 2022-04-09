@@ -1,8 +1,8 @@
 <template>
     <div class="list-container">
         <span class="content">{{ getGenre(genres[currentIdx]) }}</span>
-        <span class="btn" :class="{ disabled: currentIdx === 0 }" @click="handleLeftClick">&lt;</span>
-        <span class="btn right" :class="{ disabled: currentIdx === genres.length - 1 }" @click="handleRightClick">&gt;</span>
+        <button class="btn" :class="{ disabled: currentIdx === 0 }" @click="handleLeftClick">&lt;</button>
+        <button class="btn right" :class="{ disabled: currentIdx === genres.length - 1 }" @click="handleRightClick">&gt;</button>
     </div>
 </template>
 
@@ -43,6 +43,9 @@ export default {
 .btn {
     display: inline-flex;
     cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
     width: 20px;
     height: 20px;
     color: rgb(107, 203, 107);

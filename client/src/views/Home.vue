@@ -26,7 +26,7 @@ export default Vue.extend({
     },
     components: { Movie },
     methods: {
-        ...mapMutations(["addMovies", "addGenres"]),
+        ...mapMutations(["addMovies"]),
     },
     computed: mapState({
         movies(state: any) {
@@ -38,10 +38,8 @@ export default Vue.extend({
     }),
     async mounted() {
         try {
-            const { data: movies } = await axios.get(api.getMovie());
-            const { data: genres } = await axios.get(api.getGenres());
+            const { data: movies } = await api.getMovies();
             this.addMovies(movies);
-            this.addGenres(genres);
         } catch (err) {}
     },
 });
