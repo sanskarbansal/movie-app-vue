@@ -1,7 +1,7 @@
 <template>
     <div class="movie-container">
         <genre-list :genres="movie.genre_ids" />
-        <span>{{ movie.vote_average }}</span>
+        <span>{{ Math.round(movie.vote_average * 100) / 100 }}</span>
         <div class="movie-header">
             <h4>{{ movie.title }}</h4>
         </div>
