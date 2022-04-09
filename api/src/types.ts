@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface Movie {
     id: number;
     title: string;
@@ -13,4 +15,18 @@ export interface Movie {
 export interface Genre {
     id: number;
     name: string;
+}
+
+export interface Session<T> {
+    data?: T;
+    clear: () => void;
+    add: (key: string, val: any) => void;
+}
+
+export interface RequestWithSession extends Request {
+    session: Session<SessionData>;
+}
+
+interface SessionData {
+    votedMoviesStore: any;
 }
