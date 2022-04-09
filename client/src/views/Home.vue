@@ -12,19 +12,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
 import api from "@/services/api/index";
 import { mapMutations, mapState } from "vuex";
 import Movie from "@/components/Movie.vue";
 import GenreFilter from "@/components/GenreFilter.vue";
 import { Genre, Movie as MovieType } from "@/types";
 
-export default {
+export default Vue.extend({
     name: "Home",
     data() {
         return {
             inputTitle: "",
-            // filteredMovies: [],
             genreId: -1,
         };
     },
@@ -61,7 +59,7 @@ export default {
             this.addMovies(movies);
         } catch (err) {}
     },
-};
+});
 </script>
 
 <style scoped>

@@ -10,7 +10,7 @@
             <p>
                 {{ movie.overview }}
             </p>
-            <router-link :to="`/${movie.id}`" replace>View More</router-link>
+            <router-link :to="`/${movie.id}`">View More</router-link>
         </div>
     </div>
 </template>
