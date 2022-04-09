@@ -47,10 +47,10 @@ app.get("/movies/:id", (req: RequestWithSession, resp: any) => {
 
     const voteStore = req.session.data?.votedMoviesStore;
     let rating = false;
-    if (voteStore) {
+    if (voteStore && voteStore[id]) {
         rating = voteStore[id];
     }
-    resp.send({ ...filteredMovie, rating });
+    resp.send({ ...filteredMovie, rating: rating });
 });
 
 /**
