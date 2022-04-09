@@ -1,8 +1,9 @@
 <template>
     <div>
         <input class="search" placeholder="Search movie with title" v-model="inputTitle" />
+        <genre-filter @changeGenre="onChangeGenre" />
         <div class="movies-container">
-            <div v-for="movie in movies" v-bind:key="movie.id">
+            <div v-for="movie in filteredMovies" v-bind:key="movie.id">
                 <movie :movie="movie" />
             </div>
         </div>
@@ -15,34 +16,52 @@ import axios from "axios";
 import api from "@/services/api/index";
 import { mapMutations, mapState } from "vuex";
 import Movie from "@/components/Movie.vue";
+import GenreFilter from "@/components/GenreFilter.vue";
+import { Genre, Movie as MovieType } from "@/types";
 
-export default Vue.extend({
+export default {
     name: "Home",
     data() {
         return {
             inputTitle: "",
-            filteredMovies: [],
+            // filteredMovies: [],
+            genreId: -1,
         };
     },
-    components: { Movie },
+    components: { Movie, GenreFilter },
     methods: {
         ...mapMutations(["addMovies"]),
-    },
-    computed: mapState({
-        movies(state: any) {
-            if (this.inputTitle.trim() === "") {
-                return state.movies;
-            }
-            return state.movies.filter(({ title }: any) => title?.toLowerCase()?.includes(this.inputTitle.toLowerCase()));
+        onChangeGenre(genre: Genre) {
+            this.genreId = genre?.id;
         },
-    }),
+    },
+    computed: {
+        ...mapState(["movies"]),
+        filteredMovies() {
+            let fMovies = [];
+            const self = this as any;
+            if (self.inputTitle.trim() === "") {
+                fMovies = self.movies;
+            } else {
+                fMovies = self.movies.filter(({ title }: any) => title?.toLowerCase()?.includes(self.inputTitle.toLowerCase()));
+            }
+            // return fMovies;
+            if (self.genreId !== -1) {
+                fMovies = fMovies.filter((movie: MovieType) => movie.genre_ids.includes(self.genreId));
+            }
+            // this.filteredMovies = fMovies;
+            // return fMovies;
+            return fMovies;
+        },
+    },
+
     async mounted() {
         try {
             const { data: movies } = await api.getMovies();
             this.addMovies(movies);
         } catch (err) {}
     },
-});
+};
 </script>
 
 <style scoped>

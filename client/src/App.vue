@@ -5,9 +5,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapMutations } from "vuex";
-import { instance } from "./services/api";
+import api, { instance } from "./services/api";
 export default {
     methods: {
         ...mapMutations(["addGenres"]),

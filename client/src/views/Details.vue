@@ -96,6 +96,7 @@ export default {
 }
 .movie-header {
     width: 100%;
+    margin-top: 15px;
 }
 .movie-header > h1 {
     box-sizing: border-box;
